@@ -20,5 +20,10 @@ class Principal {
 
 //Matricular três alunos no curso de Android.
 fun main(){
+    val DigitalHouseManager: DigitalHouseManager()
 
+    DigitalHouseManager.registrarProfessorTitular ("um", "Professor Titular", 1, "Web Full Stack")
+    DigitalHouseManager.registrarProfessorTitular ("dois", "Professor Titular", 2, "Kotlin")
+
+    DigitalHouseManager.registrarProfessorAdjunto("")
 }
