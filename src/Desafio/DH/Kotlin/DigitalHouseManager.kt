@@ -16,40 +16,38 @@ class DigitalHouseManager {
     val cursos = mutableListOf<Curso>()
     val matriculas = mutableListOf<Matricula>()
 
-    fun registrarCurso(val nome: String = "", val codCurso: Int = 0, val maxAlunos: Int = 0){
-        cursos.find { .. }
-        cursos.add(Curso(val nome: String = "", val codCurso: Int = 0, val maxAlunos: Int = 0))
+    fun registrarCurso( nome: String,  codCurso: Int,  maxAlunos: Int ){
+        cursos.add(Curso( nome,  codCurso, maxAlunos))
     }
 
-    fun excluirCurso(val codCurso: Int = 0){
-        cursos.removeAll(codCurso == codCurso)
+    fun excluirCurso(codCurso: Int ) {
+       // cursos.find { it.codCurso == codCurso }
+
+        for (Curso in cursos) {
+            if (Curso.codCurso == codCurso) {
+                cursos.remove(Curso)
+            }
+        //cursos.remove(Curso)
+        }
+    }
+
+    fun registrarProfessorAdjunto( nome: String,  sobrenome: String , tempoCasa: Int, codProfessor: Int, horasMonitoria: Int){
+        professores.add(ProfessorAdjunto(nome,  sobrenome,  tempoCasa,  codProfessor,  horasMonitoria))
+    }
+
+    fun registrarProfessorTitular( nome: String,  sobrenome: String,  tempoCasa: Int,  codProfessor: Int, especialidade: String){
+        professores.add(ProfessorTitular( nome,  sobrenome,  tempoCasa,  codProfessor ,  especialidade))
+    }
+
+    fun excluirProfessor(codProfessor: Int){
 
     }
 
-    fun registrarProfessorAdjunto(val nome: String = "", val sobrenome: String = "", var tempoCasa: Int = 0, var codProfessor: Int = 0, var horasMonitoria: Int = 0){
-        professores.find {  }
-        professores.add(val nome: String = "", val sobrenome: String = "", var tempoCasa: Int = 0, var codProfessor: Int = 0, var horasMonitoria: Int = 0)
-    }
-    fun registrarProfessorTitular(val nome: String = "", val sobrenome: String = "", var tempoCasa: Int = 0, var codProfessor: Int = 0, val especialidade: String = ""){
-        professores.find {  }
-        professores.add(val nome: String = "", val sobrenome: String = "", var tempoCasa: Int = 0, var codProfessor: Int = 0, val especialidade: String = "")
+    fun registrarAluno( nome: String,  sobrenome:String, codAluno: Int ){
+        alunos.add(Aluno( nome, sobrenome, codAluno))
     }
 
-    fun excluirProfessor(val codProfessor: Int){
-        professores.removeAll(codProfessor == codProfessor)
-    }
-
-    fun registrarAluno(val nome: String = "", val sobrenome:String = "", var codAluno: Int = 0){
-
-        alunos.find {  }
-        alunos.add(Aluno(val nome: String = "", val sobrenome:String = "", var codAluno: Int = 0))
-    }
-
-    fun matricularAluno(val aluno: Aluno, val curso: Curso){
-
-        val curso = cursos.find {  }
-
-        val aluno = alunos.find {  }
+    fun matricularAluno( aluno: Aluno, curso: Curso){
 
         if (curso.adicionarUmAluno(aluno)){
             matriculas.add(Matricula(aluno,curso))
@@ -61,13 +59,33 @@ class DigitalHouseManager {
 
     fun alocarProfessores(codCurso: Int,codProfessorTitular: Int, codProfessorAdjunto: Int){
 
-        val professorTitular = professores.find {  }
-        val professorAdjunto = professores.find {  }
+        val professorTitular = professores.find {it.codProfessor == codProfessorTitular  }
+        val professorAdjunto = professores.find {it.codProfessor == codProfessorAdjunto  }
+        val curso = cursos.find { it.codCurso == codCurso }
+
+        if (curso == null ){
+            println("O curso não existe!")
+            return
+        }
+
+        if (professorAdjunto == null){
+            println("O professor Adjunto não existe!")
+            return
+        }
+
+        if (professorTitular == null){
+            println("O professor Titular não existe!")
+            return
+        }
+
+        curso.ProfessorAdjunto = professorAdjunto as ProfessorAdjunto
+        curso.ProfessorTitular = professorTitular as ProfessorTitular
     }
 
-    fun consultaCurso(codAluno: Int){
+    //fun consultaCurso(codAluno: Int){
 
-        val matricula = matriculas.find {  }
-    }
+    //    val matricula = matriculas.find {  }
+    // }
+    // arrumar dps
 
 }

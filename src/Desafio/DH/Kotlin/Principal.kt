@@ -20,10 +20,13 @@ class Principal {
 
 //Matricular três alunos no curso de Android.
 fun main(){
-    val DigitalHouseManager: DigitalHouseManager()
+    val digitalHouseManager: DigitalHouseManager
 
-    DigitalHouseManager.registrarProfessorTitular ("um", "Professor Titular", 1, "Web Full Stack")
-    DigitalHouseManager.registrarProfessorTitular ("dois", "Professor Titular", 2, "Kotlin")
+    digitalHouseManager.registrarProfessorTitular ("Ana", "Professor Titular", 1, "Web Full Stack", "blabla")
+    digitalHouseManager.registrarProfessorTitular ("Belo", "Professor Titular", 2, "Kotlin", "kaka")
 
-    DigitalHouseManager.registrarProfessorAdjunto("")
+    digitalHouseManager.registrarProfessorAdjunto("Carlos","Carvalho", 3)
+    digitalHouseManager.registrarProfessorAdjunto("Daniela", "Damasco", 4)
+
+
 }

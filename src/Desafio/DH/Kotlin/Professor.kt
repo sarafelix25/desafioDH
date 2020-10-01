@@ -5,8 +5,10 @@ open class Professor(val nome: String = "", val sobrenome: String = "", var temp
 
     override fun equals(other: Any?): Boolean {
 
-        return (Professor) .codProfessor == this.codProfessor
-        //falta mais alguma coisa, mas não sei o que kkkkkk
+        other as Professor
+
+        return other.codProfessor == this.codProfessor
+
     }
 }
 //professor(nome: String, sobrenome: String, tempoCasa: Int, codProfessor: Int ){
