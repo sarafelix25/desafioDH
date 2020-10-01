@@ -14,7 +14,7 @@ class DigitalHouseManager {
     val alunos = mutableListOf<Aluno>()
     val professores = mutableListOf<Professor>()
     val cursos = mutableListOf<Curso>()
-    val matriculas = mutableListOf<Matricula>()
+    var matriculas = mutableListOf<Matricula>()
 
     fun registrarCurso(nome: String, codCurso: Int, maxAlunos: Int) {
         cursos.add(Curso(nome, codCurso, maxAlunos))
@@ -76,6 +76,11 @@ class DigitalHouseManager {
     }
 
     fun consultaCurso(codAluno: Int) {
-
+        val matriculas = matriculas.find { it.aluno.codAluno == codAluno  }
+            if (matriculas == null){
+                println("Matrícula de aluno não cadastrada")
+            } else {
+                println("O aluno está matriculado no curso ${matriculas.curso.nome}")
+            }
     }
 }
