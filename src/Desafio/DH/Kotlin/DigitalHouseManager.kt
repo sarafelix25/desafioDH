@@ -16,64 +16,57 @@ class DigitalHouseManager {
     val cursos = mutableListOf<Curso>()
     val matriculas = mutableListOf<Matricula>()
 
-    fun registrarCurso( nome: String,  codCurso: Int,  maxAlunos: Int ){
-        cursos.add(Curso( nome,  codCurso, maxAlunos))
+    fun registrarCurso(nome: String, codCurso: Int, maxAlunos: Int) {
+        cursos.add(Curso(nome, codCurso, maxAlunos))
     }
 
-    fun excluirCurso(codCurso: Int ) {
-       // cursos.find { it.codCurso == codCurso }
-
-        for (Curso in cursos) {
-            if (Curso.codCurso == codCurso) {
-                cursos.remove(Curso)
-            }
-        //cursos.remove(Curso)
-        }
+    fun excluirCurso(codCurso: Int) {
+        cursos.remove(cursos.find { it.codCurso == codCurso })
     }
 
-    fun registrarProfessorAdjunto( nome: String,  sobrenome: String , tempoCasa: Int, codProfessor: Int, horasMonitoria: Int){
-        professores.add(ProfessorAdjunto(nome,  sobrenome,  tempoCasa,  codProfessor,  horasMonitoria))
+    fun registrarProfessorAdjunto(nome: String, sobrenome: String, tempoCasa: Int, codProfessor: Int, horasMonitoria: Int) {
+        professores.add(ProfessorAdjunto(nome, sobrenome, tempoCasa, codProfessor, horasMonitoria))
     }
 
-    fun registrarProfessorTitular( nome: String,  sobrenome: String,  tempoCasa: Int,  codProfessor: Int, especialidade: String){
-        professores.add(ProfessorTitular( nome,  sobrenome,  tempoCasa,  codProfessor ,  especialidade))
+    fun registrarProfessorTitular(nome: String, sobrenome: String, tempoCasa: Int, codProfessor: Int, especialidade: String) {
+        professores.add(ProfessorTitular(nome, sobrenome, tempoCasa, codProfessor, especialidade))
     }
 
-    fun excluirProfessor(codProfessor: Int){
-
+    fun excluirProfessor(codProfessor: Int) {
+        professores.remove(professores.find { it.codProfessor == codProfessor })
     }
 
-    fun registrarAluno( nome: String,  sobrenome:String, codAluno: Int ){
-        alunos.add(Aluno( nome, sobrenome, codAluno))
+    fun registrarAluno(nome: String, sobrenome: String, codAluno: Int) {
+        alunos.add(Aluno(nome, sobrenome, codAluno))
     }
 
-    fun matricularAluno( aluno: Aluno, curso: Curso){
+    fun matricularAluno(aluno: Aluno, curso: Curso) {
 
-        if (curso.adicionarUmAluno(aluno)){
-            matriculas.add(Matricula(aluno,curso))
+        if (curso.adicionarUmAluno(aluno)) {
+            matriculas.add(Matricula(aluno, curso))
             println("Ok")
-        } else{
+        } else {
             println("Matricula não realizada")
         }
     }
 
-    fun alocarProfessores(codCurso: Int,codProfessorTitular: Int, codProfessorAdjunto: Int){
+    fun alocarProfessores(codCurso: Int, codProfessorTitular: Int, codProfessorAdjunto: Int) {
 
-        val professorTitular = professores.find {it.codProfessor == codProfessorTitular  }
-        val professorAdjunto = professores.find {it.codProfessor == codProfessorAdjunto  }
+        val professorTitular = professores.find { it.codProfessor == codProfessorTitular }
+        val professorAdjunto = professores.find { it.codProfessor == codProfessorAdjunto }
         val curso = cursos.find { it.codCurso == codCurso }
 
-        if (curso == null ){
+        if (curso == null) {
             println("O curso não existe!")
             return
         }
 
-        if (professorAdjunto == null){
+        if (professorAdjunto == null) {
             println("O professor Adjunto não existe!")
             return
         }
 
-        if (professorTitular == null){
+        if (professorTitular == null) {
             println("O professor Titular não existe!")
             return
         }
@@ -82,10 +75,7 @@ class DigitalHouseManager {
         curso.ProfessorTitular = professorTitular as ProfessorTitular
     }
 
-    //fun consultaCurso(codAluno: Int){
+    fun consultaCurso(codAluno: Int) {
 
-    //    val matricula = matriculas.find {  }
-    // }
-    // arrumar dps
-
+    }
 }
