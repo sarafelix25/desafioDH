@@ -1,16 +1,6 @@
 package Desafio.DH.Kotlin
 
-class DigitalHouseManager {
-    //aluno, professor, curso, matricula - MutableList<Elementos>
-    //fun registrarCurso(nome: String, codigoCurso: Integer, quantidadeMaximaDeAlunos: Integer )
-    //fun excluirCurso(codigoCurso: Integer)
-    //fun registrarProfessorAdjunto(nome: String , sobrenome: String , codigoProfessor: Integer, quantidadeDeHoras: Integer)
-    //fun registrarProfessorTitular(nome: String , sobrenome: String, codigoProfessor: Integer, especialidade: String)
-    //fun excluirProfessor(codigoProfessor: Integer)
-    //matricularAluno(nome: String, sobrenome: String, codigoAluno: Integer)
-    //matricularAluno(codigoAluno: Integer, codigoCurso: Integer)
-    //fun alocarProfessores(codigoCurso: Integer,codigoProfessorTitular: Integer, codigoProfessorAdjunto: Integer)
-
+class DigitalHouseManager() {
     val alunos = mutableListOf<Aluno>()
     val professores = mutableListOf<Professor>()
     val cursos = mutableListOf<Curso>()
@@ -21,7 +11,7 @@ class DigitalHouseManager {
     }
 
     fun excluirCurso(codCurso: Int) {
-        cursos.remove(cursos.find { it.codCurso == codCurso })
+        cursos.remove(cursos.find{it.codCurso == codCurso})
     }
 
     fun registrarProfessorAdjunto(nome: String, sobrenome: String, tempoCasa: Int, codProfessor: Int, horasMonitoria: Int) {
@@ -33,54 +23,66 @@ class DigitalHouseManager {
     }
 
     fun excluirProfessor(codProfessor: Int) {
-        professores.remove(professores.find { it.codProfessor == codProfessor })
+        professores.remove(professores.find{it.codProfessor == codProfessor})
     }
 
     fun registrarAluno(nome: String, sobrenome: String, codAluno: Int) {
         alunos.add(Aluno(nome, sobrenome, codAluno))
     }
 
-    fun matricularAluno(aluno: Aluno, curso: Curso) {
+    fun matricularAluno(codAluno: Int, codCurso: Int) {
+        val aluno = alunos.find {it.codAluno == codAluno}
+        val curso = cursos.find {it.codCurso == codCurso}
 
+        if (aluno == null){
+            println("O aluno não existe!")
+            return
+        }
+        if (curso == null){
+            println("O curso não existe!")
+            return
+        }
         if (curso.adicionarUmAluno(aluno)) {
             matriculas.add(Matricula(aluno, curso))
             println("Ok")
         } else {
-            println("Matricula não realizada")
+            println("Máximo de alunos atingido para o curso ${curso}")
         }
+        matriculas.add(Matricula(aluno, curso))
     }
 
     fun alocarProfessores(codCurso: Int, codProfessorTitular: Int, codProfessorAdjunto: Int) {
-
-        val professorTitular = professores.find { it.codProfessor == codProfessorTitular }
-        val professorAdjunto = professores.find { it.codProfessor == codProfessorAdjunto }
-        val curso = cursos.find { it.codCurso == codCurso }
+        val professorTitular = professores.find{it.codProfessor == codProfessorTitular}
+        val professorAdjunto = professores.find{it.codProfessor == codProfessorAdjunto}
+        val curso = cursos.find{it.codCurso == codCurso}
 
         if (curso == null) {
             println("O curso não existe!")
             return
         }
-
         if (professorAdjunto == null) {
             println("O professor Adjunto não existe!")
             return
         }
-
         if (professorTitular == null) {
             println("O professor Titular não existe!")
             return
         }
-
         curso.ProfessorAdjunto = professorAdjunto as ProfessorAdjunto
         curso.ProfessorTitular = professorTitular as ProfessorTitular
     }
 
     fun consultaCurso(codAluno: Int) {
-        val matriculas = matriculas.find { it.aluno.codAluno == codAluno  }
-            if (matriculas == null){
-                println("Matrícula de aluno não cadastrada")
-            } else {
-                println("O aluno está matriculado no curso ${matriculas.curso.nome}")
-            }
+        val matriculas = matriculas.find{it.aluno.codAluno == codAluno}
+
+        if (matriculas == null){
+            println("Matrícula de aluno não cadastrada")
+        } else {
+            println("O aluno está matriculado no curso ${matriculas.curso.nome}")
+        }
+    }
+
+    override fun toString(): String {
+        return "Alunos: ${alunos}\nProfessores: ${professores}\nCursos: ${cursos}\nMatrículas: $matriculas\n"
     }
 }

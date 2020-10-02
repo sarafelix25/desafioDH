@@ -1,28 +1,28 @@
 package Desafio.DH.Kotlin
 
  class Curso(val nome: String , val codCurso: Int , val maxAlunos: Int) {
+     lateinit var ProfessorTitular: ProfessorTitular
+     lateinit var ProfessorAdjunto: ProfessorAdjunto
 
-    lateinit var ProfessorTitular: ProfessorTitular
-    lateinit var ProfessorAdjunto: ProfessorAdjunto
-
-    val alunosMatriculados: MutableList<Aluno> = mutableListOf<Aluno>()
+     val alunosMatriculados: MutableList<Aluno> = mutableListOf<Aluno>()
 
      override fun equals(other: Any?): Boolean {
+         other as Curso
 
-        other as Curso
-
-        return other.codCurso == this.codCurso
+         return other.codCurso == this.codCurso
   }
 
-   fun adicionarUmAluno(Aluno: Aluno): Boolean{
+    fun adicionarUmAluno(Aluno: Aluno): Boolean{
+        if (alunosMatriculados.size >= maxAlunos){
 
-       alunosMatriculados.add(Aluno)
+            return false
+        }
+        alunosMatriculados.add(Aluno)
 
-       return false // voltar dps
+        return true
+    }
 
-   }
-
-   fun excluirAluno(Aluno: Aluno){
+    fun excluirAluno(Aluno: Aluno){
        alunosMatriculados.remove(Aluno)
-   }
-}
+    }
+ }
